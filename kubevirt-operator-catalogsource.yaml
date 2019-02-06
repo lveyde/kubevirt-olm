@@ -4,7 +4,7 @@ metadata:
   name: kubevirt-operators
   namespace: openshift-operator-lifecycle-manager
 spec:
-  sourceType: internal
-  configMap: kubevirt-operators
+  sourceType: grpc
+  image: docker.io/djzager/kubevirt-operators
   displayName: KubeVirt Operators
   publisher: Red Hat
