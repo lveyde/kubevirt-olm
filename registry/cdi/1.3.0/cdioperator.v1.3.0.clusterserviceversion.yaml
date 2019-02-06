@@ -22,7 +22,7 @@ spec:
     supported: true
   - type: MultiNamespace
     supported: true
-  - name: AllNamespaces
+  - type: AllNamespaces
     supported: true
   provider:
     name: RedHat

@@ -27,7 +27,7 @@ spec:
     supported: true
   - type: MultiNamespace
     supported: true
-  - name: AllNamespaces
+  - type: AllNamespaces
     supported: true
   labels:
     operated-by: kubevirt
@@ -158,11 +158,12 @@ spec:
       description: Virtual Machines
 
     required:
-    - name: embercsis.ember-csi.io
-      version: v1alpha1
-      kind: EmberCSI
-      displayName: EmberCSI Application
-      description: Represents an instance of a EmberCSI application
+    # Commenting out until we have an operator that provides them in our catalog
+    # - name: embercsis.ember-csi.io
+    #   version: v1alpha1
+    #   kind: EmberCSI
+    #   displayName: EmberCSI Application
+    #   description: Represents an instance of a EmberCSI application
 
     - name: cdis.cdi.kubevirt.io
       version: v1alpha1
