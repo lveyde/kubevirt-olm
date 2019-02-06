@@ -158,20 +158,12 @@ spec:
       description: Virtual Machines
 
     required:
-<<<<<<< HEAD
     # Commenting out until we have an operator that provides them in our catalog
     # - name: embercsis.ember-csi.io
     #   version: v1alpha1
     #   kind: EmberCSI
     #   displayName: EmberCSI Application
     #   description: Represents an instance of a EmberCSI application
-=======
-    - name: embercsis.ember-csi.io
-      version: v1alpha1
-      kind: EmberCSI
-      displayName: EmberCSI Application
-      description: Represents an instance of a EmberCSI application
->>>>>>> Break up configmap into component pieces
 
     - name: cdis.cdi.kubevirt.io
       version: v1alpha1
