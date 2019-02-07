@@ -89,7 +89,7 @@ spec:
               serviceAccountName: cdi-operator
               containers:
               - name: cdi-operator
-                image: docker.io/kubevirt/cdi-operator:latest
+                image: docker.io/kubevirt/cdi-operator:v1.5.2
                 ports:
                 - containerPort: 60000
                   name: metrics
