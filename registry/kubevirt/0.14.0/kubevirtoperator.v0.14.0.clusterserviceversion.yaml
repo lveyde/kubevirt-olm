@@ -54,6 +54,19 @@ spec:
       - serviceAccountName: kubevirt-operator
         rules:
         - apiGroups:
+          - kubevirt.io
+          resources:
+          - kubevirts
+          verbs:
+          - get
+          - delete
+          - create
+          - update
+          - patch
+          - list
+          - watch
+          - deletecollection
+        - apiGroups:
           - virt.kubevirt.io
           resources:
           - "*"
@@ -96,37 +109,72 @@ spec:
           - '*'
 
       deployments:
-      - name: kubevirt-operator
+      - name: virt-operator
         spec:
           replicas: 1
           selector:
             matchLabels:
-              name: kubevirt-operator
+              operator.kubevirt.io: virt-operator
           template:
             metadata:
+              annotations:
+                scheduler.alpha.kubernetes.io/critical-pod: ""
+                scheduler.alpha.kubernetes.io/tolerations: |
+                  [
+                    {
+                      "key": "CriticalAddonsOnly",
+                      "operator": "Exists"
+                    }
+                  ]
               labels:
-                name: kubevirt-operator
+                operator.kubevirt.io: virt-operator
+                prometheus.kubevirt.io: ""
             spec:
               serviceAccountName: kubevirt-operator
               containers:
-              - name: kubevirt-operator
-                image: docker.io/kubevirt/kubevirt-operator:v0.14.0
+              - name: virt-operator
+                image: &image docker.io/kubevirt/virt-operator:v0.14.0
                 ports:
-                - containerPort: 60000
-                  name: metrics
+                - containerPort: 8443
+                  name: "metrics"
+                  protocol: "TCP"
                 command:
-                - kubevirt-operator
-                imagePullPolicy: Always
+                - virt-operator
+                - --port
+                - "8443"
+                - -v
+                - "2"
+                imagePullPolicy: IfNotPresent
+                readinessProbe:
+                  httpGet:
+                    scheme: HTTPS
+                    port: "metrics"
+                    path: "/metrics"
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
                 env:
+                # WATCH_NAMESPACE is removed in the latest version of the virt-operator deployment def.
                 - name: WATCH_NAMESPACE
                   valueFrom:
                     fieldRef:
                       fieldPath: metadata.namespace
+                # OPERATOR_NAME is removed in the latest version of the virt-operator deployment def.
                 - name: OPERATOR_NAME
-                  value: "kubevirt-operator"
+                  value: "virt-operator"
+                - name: OPERATOR_IMAGE
+                  value: *image
+              securityContext:
+                runAsNonRoot: true
 
   customresourcedefinitions:
     owned:
+    - name: kubevirts.kubevirt.io
+      version: v1alpha3
+      kind: KubeVirt
+      displayName: KubeVirt
+      description: KubeVirt
+
+    # These were all removed from the current version of the virt-operator def.
     - name: virtualization.virt.kubevirt.io
       version: v1alpha1
       kind: Virt
