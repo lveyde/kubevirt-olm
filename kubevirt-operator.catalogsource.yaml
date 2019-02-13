@@ -5,6 +5,6 @@ metadata:
   namespace: openshift-operator-lifecycle-manager
 spec:
   sourceType: grpc
-  image: docker.io/lveyde/kubevirt-operators:v0.1.5
+  image: docker.io/lveyde/kubevirt-operators:latest
   displayName: KubeVirt Operators
   publisher: Red Hat
