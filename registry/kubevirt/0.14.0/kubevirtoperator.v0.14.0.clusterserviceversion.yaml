@@ -256,12 +256,6 @@ spec:
       description: KubeVirt
 
     # These were all removed from the current version of the virt-operator def.
-    - name: virtualization.virt.kubevirt.io
-      version: v1alpha1
-      kind: Virt
-      displayName: KubeVirt
-      description: KubeVirt operator managing the KubeVirt Application
-
     - name: virtualmachineinstances.kubevirt.io
       version: v1alpha2
       kind: VirtualMachineInstance
