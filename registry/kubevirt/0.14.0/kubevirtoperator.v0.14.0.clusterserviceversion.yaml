@@ -255,31 +255,6 @@ spec:
       displayName: KubeVirt
       description: KubeVirt
 
-    # These were all removed from the current version of the virt-operator def.
-    - name: virtualmachineinstances.kubevirt.io
-      version: v1alpha2
-      kind: VirtualMachineInstance
-      displayName: virtualmachineinstance
-      description: Virtual Machine Templates
-
-    - name: virtualmachineinstancereplicasets.kubevirt.io
-      version: v1alpha2
-      kind: VirtualMachineInstanceReplicaSet
-      displayName: virtualmachineinstancereplicaset
-      description: Virtual Machine Replica Sets
-
-    - name: virtualmachineinstancepresets.kubevirt.io
-      version: v1alpha2
-      kind: VirtualMachineInstancePreset
-      displayName: virtualmachineinstancepreset
-      description: Virtual Machine Presets
-
-    - name: virtualmachines.kubevirt.io
-      version: v1alpha2
-      kind: VirtualMachine
-      displayName: virtualmachine
-      description: Virtual Machines
-
     - name: cdis.cdi.kubevirt.io
       version: v1alpha1
       kind: CDI
